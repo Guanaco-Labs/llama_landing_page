@@ -1,9 +1,434 @@
-<!doctype html>
-<html>
+<html lang="en">
+
   <head>
-    <title>This is the title of the webpage!</title>
+    <script>
+      window.FontAwesomeConfig = {
+        autoReplaceSvg: 'nest'
+      };
+    </script>
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guanaco Labs - Nanobody Design</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme:
+        {
+          extend:
+          {
+            colors:
+            {
+              brand:
+              {
+                green: '#20C997',
+                dark: '#1E293B',
+                light: '#F8FAFC',
+                blue: '#3B82F6',
+                muted: '#94A3B8'
+              }
+            },
+            fontFamily:
+            {
+              sans: ['Inter', 'sans-serif'],
+              display: ['Outfit', 'sans-serif']
+            }
+          }
+        }
+      }
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Outfit:wght@400;500;600;700;800&amp;display=swap"
+      rel="stylesheet">
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js">
+    </script>
+    <style>
+      body
+      {
+        font-family: 'Inter', sans-serif;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6
+      {
+        font-family: 'Outfit', sans-serif;
+      }
+
+      ::-webkit-scrollbar
+      {
+        display: none;
+      }
+    </style>
   </head>
-  <body>
-    <p>This is an example paragraph. Anything in the <strong>body</strong> tag will appear on the page, just like this <strong>p</strong> tag and its contents.</p>
+
+  <body
+    class="bg-brand-light text-brand-dark w-full min-h-screen overflow-x-hidden">
+    <!-- Navigation -->
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guanaco Labs - Nanobody Design</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Outfit:wght@400;500;600;700;800&amp;display=swap"
+      rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guanaco Labs - Nanobody Design</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Outfit:wght@400;500;600;700;800&amp;display=swap"
+      rel="stylesheet">
+    <nav id="navbar"
+      class="fixed w-full z-50 transition-all duration-300 bg-white/80 backdrop-blur-md border-b border-gray-200/50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 rounded-full bg-brand-green/10 flex items-center justify-center">
+              <i class="fa-solid fa-horse-head text-brand-green text-xl"></i>
+              <!-- Placeholder for Llama -->
+            </div><span
+              class="font-display font-bold text-2xl tracking-tight">Guanaco
+              Labs</span>
+          </div>
+          <div class="hidden md:flex items-center space-x-8"><a href="#services"
+              class="text-sm font-medium text-gray-600 hover:text-brand-green transition-colors">Services</a><a
+              href="#workflow"
+              class="text-sm font-medium text-gray-600 hover:text-brand-green transition-colors">Technology</a><a
+              href="mailto:help@guanacolabs.com"
+              class="px-6 py-2.5 rounded-full bg-brand-dark text-white text-sm font-medium hover:bg-gray-800 transition-all shadow-lg shadow-gray-200">Contact
+              Us</a></div>
+          <div class="md:hidden flex items-center"><button id="mobile-menu-btn"
+              class="text-gray-600 hover:text-brand-green focus:outline-none"><i
+                class="fa-solid fa-bars text-2xl"></i></button></div>
+        </div>
+      </div><!-- Mobile Menu -->
+      <div id="mobile-menu"
+        class="hidden md:hidden bg-white border-b border-gray-100 absolute w-full">
+        <div class="px-4 pt-2 pb-6 space-y-1 shadow-lg"><a href="#services"
+            class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-brand-green hover:bg-gray-50">Services</a><a
+            href="#workflow"
+            class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-brand-green hover:bg-gray-50">Technology</a><a
+            href="#prediction"
+            class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-brand-green hover:bg-gray-50">Prediction
+            Tool</a><a href="mailto:help@guanacolabs.com"
+            class="block px-3 py-3 mt-4 text-center rounded-full bg-brand-dark text-white font-medium">Contact
+            Us</a></div>
+      </div>
+    </nav><!-- Hero Section -->
+    <section id="hero"
+      class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+      <div class="absolute inset-0 z-0">
+        <div
+          class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-brand-green/5 to-transparent">
+        </div>
+        <div
+          class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-brand-blue/5 blur-3xl">
+        </div>
+        <div
+          class="absolute bottom-0 left-0 w-1/3 h-1/2 bg-gradient-to-t from-brand-green/10 to-transparent blur-2xl">
+        </div>
+      </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div
+          class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+          <div class="text-center lg:text-left">
+            <h1
+              class="text-5xl lg:text-7xl font-display font-bold leading-tight mb-6 tracking-tight">
+              Leveraging <span
+                class="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-brand-blue">llamas</span>
+              to improve nanobody design
+            </h1>
+            <p
+              class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+              Pioneering AI-driven protein engineering and in vivo immunization
+              to generate highly specific, stable, and scalable nanobody
+              libraries for therapeutic and diagnostic breakthroughs.
+            </p>
+            <div
+              class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <a href="#services"
+                class="px-8 py-4 rounded-full bg-brand-dark text-white font-medium hover:bg-gray-800 transition-all shadow-xl shadow-gray-200/50 flex items-center justify-center gap-2">
+                Explore Services <i
+                  class="fa-solid fa-arrow-right text-sm"></i></a></div>
+          </div>
+          <div class="relative hidden lg:block h-[600px] w-full">
+            <div class="absolute inset-0 flex items-center justify-center">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- Services Section -->
+    <section id="services" class="py-24 bg-white relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2
+            class="text-sm font-bold text-brand-green uppercase tracking-widest mb-2">
+            Our Solutions</h2>
+          <h3 class="text-3xl md:text-5xl font-display font-bold mb-6">Tailored
+            Nanobody Generation</h3>
+          <p class="text-gray-600 text-lg">We combine traditional biological
+            methods with cutting-edge AI to deliver premium nanobody solutions.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+          <!-- Service Card 1 -->
+          <div
+            class="group bg-brand-light rounded-3xl p-8 lg:p-10 border border-gray-100 hover:shadow-2xl hover:shadow-brand-green/10 transition-all duration-300 relative overflow-hidden">
+            <div
+              class="absolute top-0 right-0 w-32 h-32 bg-brand-green/5 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110">
+            </div>
+            <div
+              class="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-8 relative z-10 border border-gray-50">
+              <i class="fa-solid fa-syringe text-2xl text-brand-green"></i>
+            </div>
+            <h4 class="text-2xl font-display font-bold mb-4 relative z-10">Llama
+              Immunization for Polyclonal Antibody Generation</h4>
+            <p
+              class="text-gray-600 mb-8 relative z-10 leading-relaxed min-h-[80px]">
+              Comprehensive immunization tailored to your specific antigens,
+              yielding robust and diverse polyclonal immune responses in our
+              healthy, free range llamas.&nbsp;</p>
+            <ul class="space-y-3 mb-8 relative z-10">
+              <li class="flex items-start gap-3 text-sm text-gray-700"><i
+                  class="fa-solid fa-check text-brand-green mt-1"></i> Custom
+                immunization schedules
+              </li>
+              <li class="flex items-start gap-3 text-sm text-gray-700"><i
+                  class="fa-solid fa-check text-brand-green mt-1"></i> Titer
+                monitoring &amp; optimization
+              </li>
+              <li class="flex items-start gap-3 text-sm text-gray-700"><i
+                  class="fa-solid fa-check text-brand-green mt-1"></i>
+                High-yield serum collection
+              </li>
+            </ul><a href="mailto:sales@guanacolabs.com"
+              class="inline-flex items-center justify-center w-full px-6 py-3.5 rounded-xl bg-white text-brand-dark font-medium border border-gray-200 group-hover:bg-brand-green group-hover:text-white group-hover:border-brand-green transition-all relative z-10">
+              Contact Sales
+            </a>
+          </div><!-- Service Card 2 -->
+          <div
+            class="group bg-brand-dark rounded-3xl p-8 lg:p-10 border border-gray-800 hover:shadow-2xl hover:shadow-brand-blue/20 transition-all duration-300 relative overflow-hidden">
+            <div
+              class="absolute top-0 right-0 w-32 h-32 bg-brand-blue/10 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110">
+            </div>
+            <div
+              class="w-14 h-14 bg-gray-800 rounded-2xl shadow-sm flex items-center justify-center mb-8 relative z-10 border border-gray-700">
+              <i class="fa-solid fa-microscope text-2xl text-white"></i></div>
+            <h4
+              class="text-2xl font-display font-bold mb-4 text-white relative z-10">
+              Custom Projects &amp; Advanced Engineering</h4>
+            <p
+              class="text-gray-400 mb-8 relative z-10 leading-relaxed min-h-[80px]">
+              Solutions from target analysis to final nanobody delivery,
+              leveraging our proprietary Vicuna model for complex therapeutic
+              targets.
+            </p>
+            <ul class="space-y-3 mb-8 relative z-10">
+              <li class="flex items-start gap-3 text-sm text-gray-300"><i
+                  class="fa-solid fa-check text-brand-blue mt-1"></i>
+                Difficult-to-express targets
+              </li>
+              <li class="flex items-start gap-3 text-sm text-gray-300"><i
+                  class="fa-solid fa-check text-brand-blue mt-1"></i> Affinity
+                maturation &amp; humanization
+              </li>
+              <li class="flex items-start gap-3 text-sm text-gray-300"><i
+                  class="fa-solid fa-check text-brand-blue mt-1"></i> Structural
+                analysis &amp; modeling
+              </li>
+            </ul><a href="mailto:sales@guanacolabs.com"
+              class="inline-flex items-center justify-center w-full px-6 py-3.5 rounded-xl bg-brand-blue text-white font-medium hover:bg-blue-600 transition-all relative z-10">
+              Discuss Your Project
+            </a>
+          </div>
+        </div>
+      </div>
+    </section><!-- Workflow Section -->
+    <section id="workflow" class="py-24 bg-brand-light relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2
+            class="text-sm font-bold text-brand-green uppercase tracking-widest mb-2">
+            The Vicuna Model</h2>
+          <h3 class="text-3xl md:text-5xl font-display font-bold mb-6">Our
+            Workflow</h3>
+          <p class="text-gray-600 text-lg">A continuous loop of biological
+            generation and computational refinement.</p>
+        </div>
+        <div class="relative">
+          <!-- Connecting Line -->
+          <div
+            class="hidden lg:block absolute top-1/2 left-0 w-full h-0.5 bg-gradient-to-r from-brand-green/20 via-brand-blue/20 to-brand-green/20 -translate-y-1/2 z-0">
+          </div>
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 relative z-10">
+            <!-- Step 1 -->
+            <div
+              class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 relative group hover:-translate-y-2 transition-transform">
+              <div
+                class="w-12 h-12 rounded-full bg-brand-green/10 flex items-center justify-center text-brand-green font-bold text-lg mb-4 mx-auto lg:mx-0">
+                1</div>
+              <h5
+                class="font-display font-bold text-lg mb-2 text-center lg:text-left">
+                Llama Immunization</h5>
+              <p class="text-sm text-gray-500 text-center lg:text-left">Target
+                antigen introduced to elicit robust VHH response.</p>
+            </div><!-- Step 2 -->
+            <div
+              class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 relative group hover:-translate-y-2 transition-transform">
+              <div
+                class="w-12 h-12 rounded-full bg-brand-green/10 flex items-center justify-center text-brand-green font-bold text-lg mb-4 mx-auto lg:mx-0">
+                2</div>
+              <h5
+                class="font-display font-bold text-lg mb-2 text-center lg:text-left">
+                B-cell Extraction</h5>
+              <p class="text-sm text-gray-500 text-center lg:text-left">
+                Isolation of PBMCs and deep sequencing of the repertoire.</p>
+            </div><!-- Step 3 -->
+            <div
+              class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 relative group hover:-translate-y-2 transition-transform">
+              <div
+                class="w-12 h-12 rounded-full bg-brand-blue/10 flex items-center justify-center text-brand-blue font-bold text-lg mb-4 mx-auto lg:mx-0">
+                3</div>
+              <h5
+                class="font-display font-bold text-lg mb-2 text-center lg:text-left">
+                Library Gen</h5>
+              <p class="text-sm text-gray-500 text-center lg:text-left">
+                Construction of high-diversity phage display libraries.</p>
+            </div><!-- Step 4 -->
+            <div
+              class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 relative group hover:-translate-y-2 transition-transform">
+              <div
+                class="w-12 h-12 rounded-full bg-brand-blue/10 flex items-center justify-center text-brand-blue font-bold text-lg mb-4 mx-auto lg:mx-0">
+                4</div>
+              <h5
+                class="font-display font-bold text-lg mb-2 text-center lg:text-left">
+                In Vitro Validation</h5>
+              <p class="text-sm text-gray-500 text-center lg:text-left">Rigorous
+                screening for affinity, specificity, and stability.</p>
+            </div><!-- Step 5 -->
+            <div
+              class="bg-brand-dark rounded-2xl p-6 shadow-lg border border-gray-800 relative group hover:-translate-y-2 transition-transform">
+              <div
+                class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white font-bold text-lg mb-4 mx-auto lg:mx-0">
+                5</div>
+              <h5
+                class="font-display font-bold text-lg mb-2 text-white text-center lg:text-left">
+                Vicuna Refinement</h5>
+              <p class="text-sm text-gray-400 text-center lg:text-left">Data
+                feeds back into AI to improve future zero-shot predictions.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- Prediction Tool Section -->
+    <!-- Footer -->
+    <footer id="footer"
+      class="bg-brand-dark pt-16 pb-8 border-t border-gray-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+          <div class="col-span-1 md:col-span-2">
+            <div class="flex items-center gap-3 mb-6">
+              <div
+                class="w-8 h-8 rounded-full bg-brand-green/20 flex items-center justify-center">
+                <i class="fa-solid fa-horse-head text-brand-green text-sm"></i>
+              </div><span
+                class="font-display font-bold text-xl text-white tracking-tight">Guanaco
+                Labs</span>
+            </div>
+            <p class="text-gray-400 mb-6 max-w-sm">Accelerating biologic
+              discovery in partnership with happy llamas and advanced AI
+              prediction models.
+            </p>
+            <div class="flex space-x-4"><a href="#"
+                class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-brand-green hover:text-white transition-colors"><i
+                  class="fa-brands fa-twitter"></i></a><a href="#"
+                class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-brand-green hover:text-white transition-colors"><i
+                  class="fa-brands fa-linkedin-in"></i></a></div>
+          </div>
+          <div>
+            <h4 class="text-white font-bold mb-6">Services</h4>
+            <ul class="space-y-3">
+              <li><a href="#"
+                  class="text-gray-400 hover:text-white transition-colors text-sm">Polyclonal
+                  Antibodies</a></li>
+              <li><a href="#"
+                  class="text-gray-400 hover:text-white transition-colors text-sm">Custom
+                  Projects</a></li>
+              <li><a href="#"
+                  class="text-gray-400 hover:text-white transition-colors text-sm">Library
+                  Generation</a></li>
+              <li></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-white font-bold mb-6">Contact</h4>
+            <ul class="space-y-3">
+              <li><a href="mailto:sales@guanacolabs.com"
+                  class="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2"><i
+                    class="fa-regular fa-envelope w-4"></i>
+                  sales@guanacolabs.com</a></li>
+              <li><a href="mailto:help@guanacolabs.com"
+                  class="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2"><i
+                    class="fa-solid fa-headset w-4"></i>
+                  help@guanacolabs.com</a></li>
+              <li class="text-gray-400 text-sm flex items-start gap-2 mt-4"><svg
+                  aria-hidden="true" focusable="false" data-prefix="fas"
+                  data-icon="location-dot" role="img"
+                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"
+                  data-fa-i2svg="" class="fa-solid fa-location-dot w-4 mt-1">
+                  <path fill="currentColor"
+                    d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z">
+                  </path>
+                </svg>
+                <!-- <i id="ivhtvb" data-gjs-type="default" draggable="true" class="fa-solid fa-location-dot w-4 mt-1"></i> Font Awesome fontawesome.com -->
+                300 Lenora St<br>#6011<br>Seattle, WA 98121</li>
+            </ul>
+          </div>
+        </div>
+        <div
+          class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p class="text-gray-500 text-sm">© 2026 Guanaco Labs. All rights
+            reserved.</p>
+          <div class="flex space-x-6"><a href="#"
+              class="text-gray-500 hover:text-white text-sm">Privacy
+              Policy</a><a href="#"
+              class="text-gray-500 hover:text-white text-sm">Terms of
+              Service</a></div>
+        </div>
+      </div>
+    </footer>
+    <script>
+      // Mobile menu toggle
+      const btn = document.getElementById('mobile-menu-btn');
+      const menu = document.getElementById('mobile-menu');
+
+      btn.addEventListener('click', () =>
+      {
+        menu.classList.toggle('hidden');
+      });
+
+      // Navbar scroll effect
+      window.addEventListener('scroll', () =>
+      {
+        const nav = document.getElementById('navbar');
+        if (window.scrollY > 10)
+        {
+          nav.classList.add('shadow-sm');
+        }
+        else
+        {
+          nav.classList.remove('shadow-sm');
+        }
+      });
+    </script>
   </body>
+
 </html>
