@@ -1,53 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - Guanaco Labs</title>
-    <style>
-        body { font-family: sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; color: #333; }
-        h1, h2, h3 { color: #222; }
-        ul { margin-bottom: 20px; }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Privacy Policy · Guanaco Labs</title>
+<meta name="description" content="How Guanaco Labs collects, uses, and safeguards your information across our websites, the Vicuna software, and related services." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="styles.css" />
+<!--
+  CONTENT NOTE (for the site owner — not legal advice):
+  This policy was realigned from the old "llama-immunization nanobody service" model to the
+  current positioning (Guanaco Labs = biotech engineering studio; Vicuna = nanobody design
+  software). Effective date left unchanged at March 30, 2026. Please have counsel review
+  before relying on it, especially the data-use / training and retention provisions.
+-->
+<style>
+  /* legal / prose page */
+  .legal { padding-block: clamp(44px, 7vw, 92px); }
+  .legal .wrap { max-width: 768px; }
+  .legal-head { margin-bottom: clamp(30px, 5vw, 52px); }
+  .legal-head h1 { font-size: clamp(2.3rem, 5vw, 3.4rem); margin-top: .35em; }
+  .legal-head .eff { font-family: var(--font-mono); font-size: .8rem; color: var(--muted); margin-top: 1.1em; }
+  .legal h3 { font-family: var(--font-serif); font-size: clamp(1.3rem, 2vw, 1.6rem); margin: 1.7em 0 .45em; }
+  .legal p { color: var(--ink-soft); margin: .9em 0; max-width: 68ch; }
+  .legal ul { margin: .6em 0 1.3em; padding-left: 1.25em; display: flex; flex-direction: column; gap: .55em; }
+  .legal li { color: var(--ink-soft); max-width: 66ch; }
+  .legal li::marker { color: var(--accent); }
+  .legal strong { color: var(--ink); font-weight: 600; }
+  .legal a { color: var(--accent); }
+  .legal a:hover { text-decoration: underline; }
+  .legal .rule { margin: 2.6em 0 1.6em; }
+  .legal .back { font-family: var(--font-mono); font-size: .82rem; }
+</style>
 </head>
 <body>
 
-    <h1>Privacy Policy for Guanaco Labs</h1>
-    <p><strong>Effective Date:</strong> March 30, 2026 </p>
+<!-- ================= HEADER ================= -->
+<header class="site-header" id="header">
+  <div class="wrap nav">
+    <a class="brand brand--accent" href="index.html" aria-label="Guanaco Labs home">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M5 19 C5 12, 8 4, 11 4 C12.5 4, 12.5 7, 12 9 C14 7, 19 8, 19 12 C19 17, 14 19, 11 19 Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="9.6" cy="10" r="1" fill="currentColor"/></svg>
+      </span>
+      <span><b>Guanaco</b> Labs</span>
+    </a>
+    <nav class="nav-links" id="navlinks">
+      <a class="navlink" href="index.html#capabilities">Capabilities</a>
+      <a class="navlink" href="index.html#projects">Projects</a>
+      <a class="navlink" href="vicuna.html">Vicuna</a>
+      <a class="navlink" href="index.html#team">Team</a>
+      <a class="btn btn--accent nav-cta" href="mailto:help@guanacolabs.com">Start a project</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
 
-    <p>Welcome to Guanaco Labs. We are committed to protecting your personal privacy and the integrity of your scientific data. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our nanobody generation services and related platforms.</p>
+<main>
+<section class="legal">
+  <div class="wrap">
+    <div class="legal-head">
+      <span class="eyebrow">Legal</span>
+      <h1>Privacy Policy</h1>
+      <p class="eff"><strong>Effective date:</strong> March 30, 2026</p>
+    </div>
+
+    <p>Guanaco Labs (&ldquo;Guanaco Labs,&rdquo; &ldquo;we,&rdquo; &ldquo;us&rdquo;) is a biotechnology engineering company based in Seattle, Washington. We are committed to protecting your personal privacy and the integrity of your scientific data. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our websites, our software (including Vicuna), and related services.</p>
 
     <h3>1. Information We Collect</h3>
     <p>We collect information that identifies you personally, as well as scientific data necessary to provide our services.</p>
     <ul>
-        <li><strong>Account Information:</strong> When you register for an account, we collect standard details such as your name, email address, organization name, and billing information.</li>
-        <li><strong>Scientific &amp; Service Data:</strong> To generate nanobodies, we collect the antigen identities and antigen sequences you submit to our platform.</li>
-        <li><strong>Guanaco Labs Generated Data:</strong> We independently generate sequencing data resulting from our llama immunizations based on your submissions.</li>
-        <li><strong>Technical Data:</strong> We automatically collect basic log data (e.g., IP addresses, browser types) necessary for website functionality and security.</li>
+      <li><strong>Account Information:</strong> When you register for an account, we collect standard details such as your name, email address, organization name, and billing information.</li>
+      <li><strong>Scientific &amp; Service Data:</strong> To run predictions and virtual screens, we process the antigen identities, antigen sequences, and nanobody designs you submit to Vicuna.</li>
+      <li><strong>Generated Results:</strong> We generate results from your submissions &mdash; including predicted binding scores, candidate rankings, and developability profiles.</li>
+      <li><strong>Technical Data:</strong> We automatically collect basic log data (e.g., IP addresses, browser types) necessary for website functionality and security.</li>
     </ul>
 
     <h3>2. How We Use Your Information</h3>
     <p>We use the information we collect for the following operational and developmental purposes:</p>
     <ul>
-        <li><strong>Providing Services:</strong> To execute the generation of nanobodies in llamas as a service and deliver the resulting data to you.</li>
-        <li><strong>Algorithm Training:</strong> We use submitted antigen identities, sequences, and the resulting immunization data to train, test, and improve "Vicuna," our proprietary nanobody prediction algorithm.</li>
-        <li><strong>Account Management:</strong> To process transactions, maintain your account, and provide customer support.</li>
+      <li><strong>Providing Services:</strong> To run Vicuna&rsquo;s binding predictions, virtual screens, and design tools, and to deliver the resulting data to you.</li>
+      <li><strong>Improving Our Software:</strong> We use submitted data and generated results to test, validate, and improve Vicuna, our proprietary nanobody design and prediction software, and our related models.</li>
+      <li><strong>Account Management:</strong> To process transactions, maintain your account, and provide customer support.</li>
     </ul>
 
     <h3>3. How We Share Your Information</h3>
     <p>We do not sell your personal data. We only share information with essential third-party service providers who assist us in operating our business:</p>
     <ul>
-        <li><strong>Hosting Services:</strong> Your data is stored and processed securely using Amazon Web Services (AWS).</li>
-        <li><strong>Payment Processors:</strong> Transactions are handled by our secure, third-party payment processor, [Insert Payment Processor Name]. We do not store your full financial information on our servers.</li>
-        <li><strong>Legal Compliance:</strong> We may disclose information if required to do so by law or in response to valid requests by public authorities.</li>
+      <li><strong>Hosting Services:</strong> Your data is stored and processed securely using Amazon Web Services (AWS).</li>
+      <li><strong>Payment Processors:</strong> Transactions are handled by a secure, third-party payment processor. We do not store your full financial information on our servers.</li>
+      <li><strong>Legal Compliance:</strong> We may disclose information if required to do so by law or in response to valid requests by public authorities.</li>
     </ul>
 
     <h3>4. Data Retention and Deletion</h3>
     <p>We handle the retention and deletion of personal account data and scientific data differently to ensure your privacy while maintaining our research capabilities:</p>
     <ul>
-        <li><strong>Personal Account Data:</strong> You may delete your account and associated personal data at any time via your account settings. We retain this personal data for a short-term buffer of 24 hours following your request to allow for account recovery, after which it is permanently deleted.</li>
-        <li><strong>Antigen Sequences &amp; Scientific Data:</strong> Unless explicitly requested, deleting your account <strong>does not</strong> automatically delete the antigen identities or sequences you have submitted, nor does it remove them from the Vicuna algorithm's training datasets.</li>
-        <li><strong>Special Deletion Requests:</strong> If you require the deletion of your submitted antigen sequences, you must submit a special request by emailing help@guanacolabs.com.</li>
+      <li><strong>Personal Account Data:</strong> You may delete your account and associated personal data at any time via your account settings. We retain this personal data for a short-term buffer of 24 hours following your request to allow for account recovery, after which it is permanently deleted.</li>
+      <li><strong>Scientific Data:</strong> Unless you explicitly request otherwise, deleting your account <strong>does not</strong> automatically delete the antigen identities, sequences, or designs you have submitted, nor does it remove them from the datasets used to improve Vicuna.</li>
+      <li><strong>Special Deletion Requests:</strong> If you require the deletion of your submitted scientific data, you must submit a special request by emailing <a href="mailto:help@guanacolabs.com">help@guanacolabs.com</a>.</li>
     </ul>
 
     <h3>5. International Data Transfers</h3>
@@ -56,20 +108,70 @@
     <h3>6. Your Privacy Rights (GDPR &amp; Global Standards)</h3>
     <p>Depending on your location (such as the European Economic Area), you may have specific rights regarding your personal data:</p>
     <ul>
-        <li><strong>Access &amp; Portability:</strong> You can request a copy of the personal data we hold about you.</li>
-        <li><strong>Correction:</strong> You can correct inaccurate or incomplete data.</li>
-        <li><strong>Erasure:</strong> You can request the deletion of your data (subject to the scientific data provisions outlined in Section 4).</li>
-        <li><strong>Objection &amp; Restriction:</strong> You can object to our processing of your data or request that we restrict its processing.</li>
+      <li><strong>Access &amp; Portability:</strong> You can request a copy of the personal data we hold about you.</li>
+      <li><strong>Correction:</strong> You can correct inaccurate or incomplete data.</li>
+      <li><strong>Erasure:</strong> You can request the deletion of your data (subject to the scientific data provisions outlined in Section 4).</li>
+      <li><strong>Objection &amp; Restriction:</strong> You can object to our processing of your data or request that we restrict its processing.</li>
     </ul>
     <p>To exercise any of these rights, please contact us at the email address below.</p>
 
     <h3>7. Contact Us</h3>
     <p>If you have questions, concerns, or special requests regarding this Privacy Policy or your data, please contact us at:</p>
-    <p>
-        <strong>Email:</strong> help@guanacolabs.com<br>
-    </p>
+    <p><strong>Email:</strong> <a href="mailto:help@guanacolabs.com">help@guanacolabs.com</a><br />
+    <strong>Address:</strong> Guanaco Labs, Seattle, WA 98121</p>
 
-    <hr>
+    <hr class="rule" />
+    <p class="back"><a href="index.html">&larr; Back to Guanaco Labs</a></p>
+  </div>
+</section>
+</main>
 
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-about">
+        <a class="brand brand--accent" href="index.html">
+          <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 19 C5 12, 8 4, 11 4 C12.5 4, 12.5 7, 12 9 C14 7, 19 8, 19 12 C19 17, 14 19, 11 19 Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="9.6" cy="10" r="1" fill="currentColor"/></svg></span>
+          <span><b>Guanaco</b> Labs</span>
+        </a>
+        <p class="foot-blurb">A Seattle biotechnology company designing technology to meet client needs — across mechanical, software, biological, and regulatory engineering.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="index.html#capabilities">Capabilities</a></li>
+          <li><a href="index.html#projects">Projects</a></li>
+          <li><a href="vicuna.html">Vicuna</a></li>
+          <li><a href="index.html#team">Team</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:help@guanacolabs.com">help@guanacolabs.com</a></li>
+          <li>Seattle, WA 98121</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Guanaco Labs. All rights reserved.</span>
+      <span style="display:inline-flex; gap:20px; align-items:center; flex-wrap:wrap">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <span class="mono">47.61°N · 122.34°W</span>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* header scroll state + mobile menu */
+  var header = document.getElementById('header');
+  addEventListener('scroll', function(){ header.classList.toggle('scrolled', scrollY > 12); }, { passive:true });
+  var mt = document.getElementById('menuToggle'), nl = document.getElementById('navlinks');
+  mt && mt.addEventListener('click', function(){ nl.classList.toggle('open'); });
+  nl && nl.addEventListener('click', function(e){ if (e.target.tagName === 'A') nl.classList.remove('open'); });
+</script>
 </body>
 </html>

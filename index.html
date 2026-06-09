@@ -1,445 +1,456 @@
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Guanaco Labs — Biotechnology, engineered</title>
+<meta name="description" content="Guanaco Labs is a Seattle biotechnology company designing technology to meet client needs — across mechanical, software, biological, and regulatory engineering." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="styles.css" />
+<script>
+  /* enable entrance animations unless ?noanim (reduced-motion is handled in CSS) */
+  (function () {
+    try {
+      if (location.search.indexOf('noanim') < 0) document.documentElement.classList.add('anim');
+    } catch (e) { document.documentElement.classList.add('anim'); }
+  })();
+</script>
+<style>
+  /* ===== page-specific ===== */
+  .hero { position: relative; padding-top: clamp(48px, 8vw, 104px); padding-bottom: var(--section-y); overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 1.08fr .92fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
+  .hero h1 { font-size: clamp(2.7rem, 6.4vw, 5.4rem); line-height: .98; letter-spacing: -.022em; }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero .lead { margin-top: 1.5rem; max-width: 44ch; }
+  .hero-cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 2.2rem; }
+  .hero-meta { display:flex; flex-wrap:wrap; gap: clamp(20px,3vw,44px); margin-top: clamp(36px,5vw,60px); padding-top: 26px; border-top: 1px solid var(--line); }
+  .hero-meta .stat .n { font-family: var(--font-serif); font-size: 1.9rem; line-height:1; }
+  .hero-meta .stat .l { font-family: var(--font-mono); font-size:.68rem; letter-spacing:.13em; text-transform:uppercase; color: var(--muted); margin-top:.6em; }
+  .hero-visual { position: relative; aspect-ratio: 1/1; }
+  [data-motif="off"] .hero-visual { display: none; }
+  [data-motif="off"] .hero-grid { grid-template-columns: 1fr; max-width: 56rem; }
+  @media (max-width: 860px){ .hero-grid { grid-template-columns: 1fr; } .hero-visual { max-width: 440px; margin-inline:auto; order:-1; } }
 
-  <head>
-    <script>
-      window.FontAwesomeConfig = {
-        autoReplaceSvg: 'nest'
-      };
-    </script>
-    <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guanaco Labs - Nanobody Design</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme:
-        {
-          extend:
-          {
-            colors:
-            {
-              brand:
-              {
-                green: '#20C997',
-                dark: '#1E293B',
-                light: '#F8FAFC',
-                blue: '#3B82F6',
-                muted: '#94A3B8'
-              }
-            },
-            fontFamily:
-            {
-              sans: ['Inter', 'sans-serif'],
-              display: ['Outfit', 'sans-serif']
-            }
-          }
-        }
-      }
-    </script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Outfit:wght@400;500;600;700;800&amp;display=swap"
-      rel="stylesheet">
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js">
-    </script>
-    <style>
-      body
-      {
-        font-family: 'Inter', sans-serif;
-      }
+  .lattice { width:100%; height:100%; overflow:visible; }
+  .lattice .edge { stroke: var(--line); stroke-width:1; }
+  .lattice .edge.live { stroke: var(--accent); stroke-width:1.4; }
+  .lattice .node { fill: var(--paper); stroke: var(--ink); stroke-width:1.4; }
+  .lattice .node.accent { fill: var(--accent); stroke: var(--accent); }
+  .lattice .node.slate { fill: var(--slate); stroke: var(--slate); }
+  .lattice .ring { fill:none; stroke: var(--line); stroke-width:1; }
+  .lattice .lab { font-family: var(--font-mono); font-size: 7px; letter-spacing:.1em; text-transform:uppercase; fill: var(--muted); }
+  @media (prefers-reduced-motion: no-preference){
+    .lattice .spin { transform-origin: 50% 50%; animation: spin 60s linear infinite; }
+    .lattice .pulse { animation: pdot 4s ease-in-out infinite; }
+    .lattice .pulse.b { animation-delay: 1.3s; } .lattice .pulse.c { animation-delay: 2.6s; }
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes pdot { 0%,100%{ opacity:.25 } 50%{ opacity:1 } }
 
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6
-      {
-        font-family: 'Outfit', sans-serif;
-      }
+  /* capabilities */
+  .cap-head { display:grid; grid-template-columns: 1fr 1fr; gap: var(--gap); align-items:end; margin-bottom: clamp(40px,5vw,64px); }
+  .cap-head h2 { font-size: clamp(2rem, 3.6vw, 3.1rem); }
+  @media (max-width:780px){ .cap-head { grid-template-columns:1fr; } }
+  .caps { display:grid; grid-template-columns: repeat(4, 1fr); gap: 0; border:1px solid var(--line); border-radius: 16px; overflow:hidden; background: var(--card); }
+  .cap {
+    padding: clamp(24px,2.4vw,34px); border-right:1px solid var(--line);
+    display:flex; flex-direction:column; gap:14px; min-height: 290px;
+    transition: background .3s;
+  }
+  .cap:last-child { border-right:0; }
+  .cap:hover { background: var(--paper-2); }
+  .cap .num { font-family:var(--font-mono); font-size:.72rem; color: var(--muted); letter-spacing:.1em; }
+  .cap .ico { width:40px; height:40px; color: var(--accent); margin-bottom: 4px;}
+  .cap h3 { font-size: 1.5rem; }
+  .cap p { color: var(--ink-soft); font-size:.96rem; }
+  .cap ul { list-style:none; padding:0; margin-top:auto; display:flex; flex-direction:column; gap:.45em; }
+  .cap li { font-family:var(--font-mono); font-size:.72rem; color: var(--slate); letter-spacing:.04em; display:flex; gap:.6em; }
+  .cap li::before { content:"—"; color: var(--accent); }
+  @media (max-width: 980px){ .caps { grid-template-columns: 1fr 1fr; } .cap:nth-child(2){border-right:0} .cap:nth-child(1),.cap:nth-child(2){border-bottom:1px solid var(--line)} }
+  @media (max-width: 560px){ .caps { grid-template-columns: 1fr; } .cap { border-right:0; border-bottom:1px solid var(--line); min-height:0; } .cap:last-child{border-bottom:0} }
 
-      ::-webkit-scrollbar
-      {
-        display: none;
-      }
-    </style>
-  </head>
+  /* projects */
+  .projects { background: var(--paper-2); }
+  .proj-flag {
+    display:grid; grid-template-columns: 1.05fr 1fr; gap: clamp(28px,4vw,56px); align-items:center;
+    background: var(--card); border:1px solid var(--line); border-radius: 22px; overflow:hidden;
+    box-shadow: var(--shadow);
+  }
+  .proj-flag .pf-body { padding: clamp(32px,4vw,56px); }
+  .proj-flag h3 { font-size: clamp(2.2rem,4vw,3.4rem); margin: .35em 0 .3em; }
+  .proj-flag h3 em { font-style: italic; color: var(--accent); }
+  .proj-flag p { color: var(--ink-soft); max-width: 42ch; }
+  .pf-feats { display:flex; flex-wrap:wrap; gap:8px; margin: 1.4em 0 1.8em; }
+  .pf-visual { align-self:stretch; background: var(--slate); position:relative; min-height: 360px; overflow:hidden; }
+  .pf-visual .ab { position:absolute; inset:0; }
+  @media (max-width: 860px){ .proj-flag { grid-template-columns:1fr; } .pf-visual { order:-1; min-height: 280px; } }
 
-  <body
-    class="bg-brand-light text-brand-dark w-full min-h-screen overflow-x-hidden">
-    <!-- Navigation -->
-    <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guanaco Labs - Nanobody Design</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Outfit:wght@400;500;600;700;800&amp;display=swap"
-      rel="stylesheet">
-    <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guanaco Labs - Nanobody Design</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Outfit:wght@400;500;600;700;800&amp;display=swap"
-      rel="stylesheet">
-    <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guanaco Labs - Nanobody Design</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Outfit:wght@400;500;600;700;800&amp;display=swap"
-      rel="stylesheet">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guanaco Labs - Nanobody Design</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Outfit:wght@400;500;600;700;800&amp;display=swap"
-      rel="stylesheet">
-    <nav id="navbar"
-      class="fixed w-full z-50 transition-all duration-300 bg-white/80 backdrop-blur-md border-b border-gray-200/50">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-20">
-          <div class="flex items-center gap-3">
-            <div
-              class="w-10 h-10 rounded-full bg-brand-green/10 flex items-center justify-center">
-              <i class="fa-solid fa-horse-head text-brand-green text-xl"></i>
-              <!-- Placeholder for Llama -->
-            </div><span
-              class="font-display font-bold text-2xl tracking-tight">Guanaco
-              Labs</span>
-          </div>
-          <div class="hidden md:flex items-center space-x-8"><a href="#services"
-              class="text-sm font-medium text-gray-600 hover:text-brand-green transition-colors">Services</a><a
-              href="#workflow"
-              class="text-sm font-medium text-gray-600 hover:text-brand-green transition-colors">Technology</a><a
-              href="mailto:help@guanacolabs.com"
-              class="px-6 py-2.5 rounded-full bg-brand-dark text-white text-sm font-medium hover:bg-gray-800 transition-all shadow-lg shadow-gray-200">Contact
-              Us</a></div>
-          <div class="md:hidden flex items-center"><button id="mobile-menu-btn"
-              class="text-gray-600 hover:text-brand-green focus:outline-none"><i
-                class="fa-solid fa-bars text-2xl"></i></button></div>
-        </div>
-      </div><!-- Mobile Menu -->
-      <div id="mobile-menu"
-        class="hidden md:hidden bg-white border-b border-gray-100 absolute w-full">
-        <div class="px-4 pt-2 pb-6 space-y-1 shadow-lg"><a href="#services"
-            class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-brand-green hover:bg-gray-50">Services</a><a
-            href="#workflow"
-            class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-brand-green hover:bg-gray-50">Technology</a><a
-            href="#prediction"
-            class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-brand-green hover:bg-gray-50">Prediction
-            Tool</a><a href="mailto:help@guanacolabs.com"
-            class="block px-3 py-3 mt-4 text-center rounded-full bg-brand-dark text-white font-medium">Contact
-            Us</a></div>
+  .proj-row { display:grid; grid-template-columns: repeat(2,1fr); gap: var(--gap); margin-top: var(--gap); }
+  .proj-card {
+    background: var(--card); border:1px solid var(--line); border-radius: 18px; padding: clamp(26px,3vw,38px);
+    display:flex; flex-direction:column; gap:14px; transition: transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s, border-color .3s;
+  }
+  .proj-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); }
+  .proj-card h4 { font-family: var(--font-serif); font-size: 1.55rem; }
+  .proj-card p { color: var(--ink-soft); font-size:.96rem; }
+  .proj-card .status { margin-top:auto; }
+  @media (max-width: 680px){ .proj-row { grid-template-columns:1fr; } }
+
+  /* approach */
+  .steps { display:grid; grid-template-columns: repeat(5, 1fr); gap: 0; counter-reset: s; margin-top: clamp(40px,5vw,60px); }
+  .step { padding: 26px 22px 26px 0; border-top: 2px solid var(--ink); position: relative; }
+  .step::before {
+    counter-increment: s; content: counter(s,decimal-leading-zero);
+    font-family: var(--font-mono); font-size:.74rem; color: var(--accent); position:absolute; top: -2px; left:0;
+    background: var(--paper); padding-right: 10px; transform: translateY(-50%);
+  }
+  .step h4 { font-family: var(--font-serif); font-size: 1.25rem; margin: 10px 0 8px; }
+  .step p { font-size:.9rem; color: var(--ink-soft); }
+  @media (max-width: 900px){ .steps { grid-template-columns: 1fr 1fr; gap: 8px 28px;} }
+  @media (max-width: 520px){ .steps { grid-template-columns: 1fr; } }
+
+  /* team */
+  .team { background: var(--paper-2); }
+  .team-grid { display:grid; grid-template-columns: .92fr 1.08fr; gap: clamp(32px,5vw,72px); align-items:start; }
+  .team-grid h2 { font-size: clamp(2rem,3.6vw,3rem); }
+  .disc-list { list-style:none; padding:0; margin-top: .2em; display:flex; flex-direction:column; }
+  .disc-list li { display:flex; gap:16px; align-items:baseline; padding: 16px 0; border-top:1px solid var(--line); }
+  .disc-list li .k { font-family: var(--font-mono); font-size:.72rem; color: var(--accent); letter-spacing:.08em; min-width: 34px; }
+  .disc-list li .t { font-family: var(--font-serif); font-size: 1.15rem; }
+  .disc-list li .d { color: var(--muted); font-size:.9rem; margin-left:auto; text-align:right; max-width: 30ch; }
+  .disc-list li:first-child { border-top:0; }
+  @media (max-width: 820px){ .team-grid { grid-template-columns:1fr; } .disc-list li .d { display:none; } }
+
+  /* contact */
+  .contact-inner { text-align:center; max-width: 60rem; margin-inline:auto; }
+  .contact-inner h2 { font-size: clamp(2.4rem, 6vw, 4.6rem); line-height:1.02; }
+  .contact-inner h2 a { color: var(--accent); text-decoration: none; position: relative; white-space:nowrap; }
+  .contact-inner h2 a::after { content:""; position:absolute; left:0; right:0; bottom:.04em; height:2px; background: var(--accent); transform: scaleX(.0); transform-origin:left; transition: transform .4s cubic-bezier(.2,.8,.2,1); }
+  .contact-inner h2 a:hover::after { transform: scaleX(1); }
+  .contact-meta { display:flex; flex-wrap:wrap; justify-content:center; gap: clamp(20px,4vw,52px); margin-top: 2.6rem; }
+  .contact-meta .cm { text-align:center; }
+  .contact-meta .cm .l { font-family:var(--font-mono); font-size:.66rem; letter-spacing:.16em; text-transform:uppercase; color: var(--muted); }
+  .contact-meta .cm .v { font-family: var(--font-serif); font-size: 1.2rem; margin-top:.4em; }
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="site-header" id="header">
+  <div class="wrap nav">
+    <a class="brand brand--accent" href="index.html" aria-label="Guanaco Labs home">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M5 19 C5 12, 8 4, 11 4 C12.5 4, 12.5 7, 12 9 C14 7, 19 8, 19 12 C19 17, 14 19, 11 19 Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="9.6" cy="10" r="1" fill="currentColor"/></svg>
+      </span>
+      <span><b>Guanaco</b> Labs</span>
+    </a>
+    <nav class="nav-links" id="navlinks">
+      <a class="navlink" href="#capabilities">Capabilities</a>
+      <a class="navlink" href="#projects">Projects</a>
+      <a class="navlink" href="vicuna.html">Vicuna</a>
+      <a class="navlink" href="#team">Team</a>
+      <a class="btn btn--accent nav-cta" href="mailto:help@guanacolabs.com">Start a project</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<main>
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow reveal">Biotechnology · Seattle, WA</span>
+      <h1 class="reveal" data-d="1">Technology, engineered for the&nbsp;hard parts of <em>biology</em>.</h1>
+      <p class="lead reveal" data-d="2">Guanaco Labs is a multidisciplinary engineering studio. We design instruments, software, and biological systems that move a problem from the bench to a real, working product.</p>
+      <div class="hero-cta reveal" data-d="3">
+        <a class="btn btn--accent" href="vicuna.html">Meet Vicuna <span class="arr">→</span></a>
+        <a class="btn btn--ghost" href="#capabilities">What we do</a>
       </div>
-    </nav><!-- Hero Section -->
-    <section id="hero"
-      class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-      <div class="absolute inset-0 z-0">
-        <div
-          class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-brand-green/5 to-transparent">
-        </div>
-        <div
-          class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-brand-blue/5 blur-3xl">
-        </div>
-        <div
-          class="absolute bottom-0 left-0 w-1/3 h-1/2 bg-gradient-to-t from-brand-green/10 to-transparent blur-2xl">
-        </div>
+      <div class="hero-meta reveal" data-d="4">
+        <div class="stat"><div class="n">4</div><div class="l">Engineering disciplines</div></div>
+        <div class="stat"><div class="n">1</div><div class="l">Integrated team</div></div>
+        <div class="stat"><div class="n">Bench&nbsp;→&nbsp;Product</div><div class="l">End to end</div></div>
       </div>
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div
-          class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
-          <div class="text-center lg:text-left">
-            <h1
-              class="text-5xl lg:text-7xl font-display font-bold leading-tight mb-6 tracking-tight">
-              Leveraging <span
-                class="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-brand-blue">llamas</span>
-              to improve nanobody design
-            </h1>
-            <p
-              class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-              Pioneering AI-driven protein engineering and in vivo immunization
-              to generate highly specific, stable, and scalable nanobody
-              libraries for therapeutic and diagnostic breakthroughs.
-            </p>
-            <div
-              class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <a href="#services"
-                class="px-8 py-4 rounded-full bg-brand-dark text-white font-medium hover:bg-gray-800 transition-all shadow-xl shadow-gray-200/50 flex items-center justify-center gap-2">
-                Explore Services <i
-                  class="fa-solid fa-arrow-right text-sm"></i></a></div>
-          </div>
-          <div class="relative hidden lg:block h-[600px] w-full">
-            <div class="absolute inset-0 flex items-center justify-center">
-            </div>
-          </div>
-        </div>
-      </div>
-    </section><!-- Services Section -->
-    <section id="services" class="py-24 bg-white relative">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-          <h2
-            class="text-sm font-bold text-brand-green uppercase tracking-widest mb-2">
-            Our Solutions</h2>
-          <h3 class="text-3xl md:text-5xl font-display font-bold mb-6">Tailored
-            Nanobody Generation</h3>
-          <p class="text-gray-600 text-lg">We combine traditional biological
-            methods with cutting-edge AI to deliver premium nanobody solutions.
-          </p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-          <!-- Service Card 1 -->
-          <div
-            class="group bg-brand-light rounded-3xl p-8 lg:p-10 border border-gray-100 hover:shadow-2xl hover:shadow-brand-green/10 transition-all duration-300 relative overflow-hidden">
-            <div
-              class="absolute top-0 right-0 w-32 h-32 bg-brand-green/5 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110">
-            </div>
-            <div
-              class="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-8 relative z-10 border border-gray-50">
-              <i class="fa-solid fa-syringe text-2xl text-brand-green"></i>
-            </div>
-            <h4 class="text-2xl font-display font-bold mb-4 relative z-10">Llama
-              Immunization for Polyclonal Antibody Generation</h4>
-            <p
-              class="text-gray-600 mb-8 relative z-10 leading-relaxed min-h-[80px]">
-              Comprehensive immunization tailored to your specific antigens,
-              yielding robust and diverse polyclonal immune responses in our
-              healthy, free range llamas.&nbsp;</p>
-            <ul class="space-y-3 mb-8 relative z-10">
-              <li class="flex items-start gap-3 text-sm text-gray-700"><i
-                  class="fa-solid fa-check text-brand-green mt-1"></i> Custom
-                immunization schedules
-              </li>
-              <li class="flex items-start gap-3 text-sm text-gray-700"><i
-                  class="fa-solid fa-check text-brand-green mt-1"></i> Titer
-                monitoring &amp; optimization
-              </li>
-              <li class="flex items-start gap-3 text-sm text-gray-700"><i
-                  class="fa-solid fa-check text-brand-green mt-1"></i>
-                High-yield serum collection
-              </li>
-            </ul><a href="mailto:sales@guanacolabs.com"
-              class="inline-flex items-center justify-center w-full px-6 py-3.5 rounded-xl bg-white text-brand-dark font-medium border border-gray-200 group-hover:bg-brand-green group-hover:text-white group-hover:border-brand-green transition-all relative z-10">
-              Contact Sales
-            </a>
-          </div><!-- Service Card 2 -->
-          <div
-            class="group bg-brand-dark rounded-3xl p-8 lg:p-10 border border-gray-800 hover:shadow-2xl hover:shadow-brand-blue/20 transition-all duration-300 relative overflow-hidden">
-            <div
-              class="absolute top-0 right-0 w-32 h-32 bg-brand-blue/10 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110">
-            </div>
-            <div
-              class="w-14 h-14 bg-gray-800 rounded-2xl shadow-sm flex items-center justify-center mb-8 relative z-10 border border-gray-700">
-              <i class="fa-solid fa-microscope text-2xl text-white"></i></div>
-            <h4
-              class="text-2xl font-display font-bold mb-4 text-white relative z-10">
-              Custom Projects &amp; Advanced Engineering</h4>
-            <p
-              class="text-gray-400 mb-8 relative z-10 leading-relaxed min-h-[80px]">
-              Solutions from target analysis to final nanobody delivery,
-              leveraging our proprietary Vicuna model for complex therapeutic
-              targets.
-            </p>
-            <ul class="space-y-3 mb-8 relative z-10">
-              <li class="flex items-start gap-3 text-sm text-gray-300"><i
-                  class="fa-solid fa-check text-brand-blue mt-1"></i>
-                Difficult-to-express targets
-              </li>
-              <li class="flex items-start gap-3 text-sm text-gray-300"><i
-                  class="fa-solid fa-check text-brand-blue mt-1"></i> Affinity
-                maturation &amp; humanization
-              </li>
-              <li class="flex items-start gap-3 text-sm text-gray-300"><i
-                  class="fa-solid fa-check text-brand-blue mt-1"></i> Structural
-                analysis &amp; modeling
-              </li>
-            </ul><a href="mailto:sales@guanacolabs.com"
-              class="inline-flex items-center justify-center w-full px-6 py-3.5 rounded-xl bg-brand-blue text-white font-medium hover:bg-blue-600 transition-all relative z-10">
-              Discuss Your Project
-            </a>
-          </div>
-        </div>
-      </div>
-    </section><!-- Workflow Section -->
-    <section id="workflow" class="py-24 bg-brand-light relative">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-          <h2
-            class="text-sm font-bold text-brand-green uppercase tracking-widest mb-2">
-            The Vicuna Model</h2>
-          <h3 class="text-3xl md:text-5xl font-display font-bold mb-6">Our
-            Workflow</h3>
-          <p class="text-gray-600 text-lg">A continuous loop of biological
-            generation and computational refinement.</p>
-        </div>
-        <div class="relative">
-          <!-- Connecting Line -->
-          <div
-            class="hidden lg:block absolute top-1/2 left-0 w-full h-0.5 bg-gradient-to-r from-brand-green/20 via-brand-blue/20 to-brand-green/20 -translate-y-1/2 z-0">
-          </div>
-          <div
-            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 relative z-10">
-            <!-- Step 1 -->
-            <div
-              class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 relative group hover:-translate-y-2 transition-transform">
-              <div
-                class="w-12 h-12 rounded-full bg-brand-green/10 flex items-center justify-center text-brand-green font-bold text-lg mb-4 mx-auto lg:mx-0">
-                1</div>
-              <h5
-                class="font-display font-bold text-lg mb-2 text-center lg:text-left">
-                Llama Immunization</h5>
-              <p class="text-sm text-gray-500 text-center lg:text-left">Target
-                antigen introduced to elicit robust VHH response.</p>
-            </div><!-- Step 2 -->
-            <div
-              class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 relative group hover:-translate-y-2 transition-transform">
-              <div
-                class="w-12 h-12 rounded-full bg-brand-green/10 flex items-center justify-center text-brand-green font-bold text-lg mb-4 mx-auto lg:mx-0">
-                2</div>
-              <h5
-                class="font-display font-bold text-lg mb-2 text-center lg:text-left">
-                B-cell Extraction</h5>
-              <p class="text-sm text-gray-500 text-center lg:text-left">
-                Isolation of PBMCs and deep sequencing of the repertoire.</p>
-            </div><!-- Step 3 -->
-            <div
-              class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 relative group hover:-translate-y-2 transition-transform">
-              <div
-                class="w-12 h-12 rounded-full bg-brand-blue/10 flex items-center justify-center text-brand-blue font-bold text-lg mb-4 mx-auto lg:mx-0">
-                3</div>
-              <h5
-                class="font-display font-bold text-lg mb-2 text-center lg:text-left">
-                Library Gen</h5>
-              <p class="text-sm text-gray-500 text-center lg:text-left">
-                Construction of high-diversity phage display libraries.</p>
-            </div><!-- Step 4 -->
-            <div
-              class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 relative group hover:-translate-y-2 transition-transform">
-              <div
-                class="w-12 h-12 rounded-full bg-brand-blue/10 flex items-center justify-center text-brand-blue font-bold text-lg mb-4 mx-auto lg:mx-0">
-                4</div>
-              <h5
-                class="font-display font-bold text-lg mb-2 text-center lg:text-left">
-                In Vitro Validation</h5>
-              <p class="text-sm text-gray-500 text-center lg:text-left">Rigorous
-                screening for affinity, specificity, and stability.</p>
-            </div><!-- Step 5 -->
-            <div
-              class="bg-brand-dark rounded-2xl p-6 shadow-lg border border-gray-800 relative group hover:-translate-y-2 transition-transform">
-              <div
-                class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white font-bold text-lg mb-4 mx-auto lg:mx-0">
-                5</div>
-              <h5
-                class="font-display font-bold text-lg mb-2 text-white text-center lg:text-left">
-                Vicuna Refinement</h5>
-              <p class="text-sm text-gray-400 text-center lg:text-left">Data
-                feeds back into AI to improve future zero-shot predictions.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section><!-- Prediction Tool Section -->
-    <!-- Footer -->
-    <footer id="footer"
-      class="bg-brand-dark pt-16 pb-8 border-t border-gray-800">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-          <div class="col-span-1 md:col-span-2">
-            <div class="flex items-center gap-3 mb-6">
-              <div
-                class="w-8 h-8 rounded-full bg-brand-green/20 flex items-center justify-center">
-                <i class="fa-solid fa-horse-head text-brand-green text-sm"></i>
-              </div><span
-                class="font-display font-bold text-xl text-white tracking-tight">Guanaco
-                Labs</span>
-            </div>
-            <p class="text-gray-400 mb-6 max-w-sm">Accelerating biologic
-              discovery in partnership with happy llamas and advanced AI
-              prediction models.
-            </p>
-            <div class="flex space-x-4"></div>
-          </div>
-          <div id="i6kx3h">
-            <h4 class="text-white font-bold mb-6">Services</h4>
-            <ul class="space-y-3">
-              <li><a href="#"
-                  class="text-gray-400 hover:text-white transition-colors text-sm">Polyclonal
-                  Antibodies</a></li>
-              <li><a href="#"
-                  class="text-gray-400 hover:text-white transition-colors text-sm">Custom
-                  Projects</a></li>
-              <li id="izy1js"><a href="#"
-                  class="text-gray-400 hover:text-white transition-colors text-sm">Library
-                  Generation</a></li>
-              <li></li>
-            </ul>
-          </div>
-          <div id="iwtss6">
-            <h4 class="text-white font-bold mb-6">Contact</h4>
-            <ul class="space-y-3">
-              <li><a href="mailto:sales@guanacolabs.com"
-                  class="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2"><i
-                    class="fa-regular fa-envelope w-4"></i>
-                  sales@guanacolabs.com</a></li>
-              <li><a href="mailto:help@guanacolabs.com"
-                  class="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2"><i
-                    class="fa-solid fa-headset w-4"></i>
-                  help@guanacolabs.com</a></li>
-              <li class="text-gray-400 text-sm flex items-start gap-2 mt-4"><svg
-                  aria-hidden="true" focusable="false" data-prefix="fas"
-                  data-icon="location-dot" role="img"
-                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"
-                  data-fa-i2svg="" class="fa-solid fa-location-dot w-4 mt-1">
-                  <path fill="currentColor"
-                    d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z">
-                  </path>
-                </svg>
-                Seattle, WA 98121</li>
-            </ul>
-          </div>
-        </div>
-        <div
-          class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p class="text-gray-500 text-sm">© 2026 Guanaco Labs. All rights
-            reserved.</p>
-          <div class="flex space-x-6"><a href="privacy.html"
-              class="text-gray-500 hover:text-white text-sm">Privacy
-              Policy</a><a href="terms.html"
-              class="text-gray-500 hover:text-white text-sm">Terms of
-              Service</a></div>
-        </div>
-      </div>
-    </footer>
-    <script>
-      // Mobile menu toggle
-      const btn = document.getElementById('mobile-menu-btn');
-      const menu = document.getElementById('mobile-menu');
+    </div>
 
-      btn.addEventListener('click', () =>
-      {
-        menu.classList.toggle('hidden');
-      });
+    <div class="hero-visual reveal" data-d="2" aria-hidden="true">
+      <svg class="lattice" viewBox="0 0 300 300">
+        <g class="spin">
+          <circle class="ring" cx="150" cy="150" r="120"/>
+          <circle class="ring" cx="150" cy="150" r="78"/>
+        </g>
+        <!-- edges -->
+        <g>
+          <line class="edge live" x1="150" y1="150" x2="60" y2="70"/>
+          <line class="edge live" x1="150" y1="150" x2="246" y2="92"/>
+          <line class="edge live" x1="150" y1="150" x2="70" y2="232"/>
+          <line class="edge live" x1="150" y1="150" x2="232" y2="226"/>
+          <line class="edge" x1="60" y1="70" x2="246" y2="92"/>
+          <line class="edge" x1="246" y1="92" x2="232" y2="226"/>
+          <line class="edge" x1="232" y1="226" x2="70" y2="232"/>
+          <line class="edge" x1="70" y1="232" x2="60" y2="70"/>
+        </g>
+        <!-- outer nodes -->
+        <circle class="node accent pulse" cx="60" cy="70" r="7"/>
+        <circle class="node slate pulse b" cx="246" cy="92" r="7"/>
+        <circle class="node slate pulse c" cx="70" cy="232" r="7"/>
+        <circle class="node accent pulse" cx="232" cy="226" r="7"/>
+        <!-- center -->
+        <circle class="node" cx="150" cy="150" r="13" style="fill:var(--ink);stroke:var(--ink)"/>
+        <circle cx="150" cy="150" r="5" style="fill:var(--paper)"/>
+        <text class="lab" x="44" y="56">MECH</text>
+        <text class="lab" x="232" y="80">SOFTWARE</text>
+        <text class="lab" x="44" y="252">BIO</text>
+        <text class="lab" x="208" y="248">REG</text>
+      </svg>
+    </div>
+  </div>
+</section>
 
-      // Navbar scroll effect
-      window.addEventListener('scroll', () =>
-      {
-        const nav = document.getElementById('navbar');
-        if (window.scrollY > 10)
-        {
-          nav.classList.add('shadow-sm');
-        }
-        else
-        {
-          nav.classList.remove('shadow-sm');
-        }
-      });
-    </script>
-  </body>
+<!-- ================= CAPABILITIES ================= -->
+<section class="section" id="capabilities">
+  <div class="wrap">
+    <div class="cap-head">
+      <div>
+        <span class="eyebrow reveal">What we do</span>
+        <h2 class="reveal" data-d="1">One team, four engineering disciplines — working the problem together.</h2>
+      </div>
+      <p class="lead reveal" data-d="2">Most hard problems in biotech sit between fields. We keep mechanical, software, biological, and regulatory engineers under one roof so the handoffs disappear.</p>
+    </div>
 
+    <div class="caps">
+      <div class="cap reveal" data-d="1">
+        <svg class="ico" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="5" stroke="currentColor" stroke-width="1.6"/><path d="M16 2v5M16 25v5M2 16h5M25 16h5M6 6l3.5 3.5M22.5 22.5 26 26M26 6l-3.5 3.5M9.5 22.5 6 26" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <div class="num">01</div>
+        <h3>Mechanical</h3>
+        <p>Instruments, fluidics, and lab hardware designed for repeatability and manufacture.</p>
+        <ul><li>Device & fixture design</li><li>Fluidics & automation</li><li>DFM & prototyping</li></ul>
+      </div>
+      <div class="cap reveal" data-d="2">
+        <svg class="ico" viewBox="0 0 32 32" fill="none"><path d="M11 10 6 16l5 6M21 10l5 6-5 6M18 7l-4 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="num">02</div>
+        <h3>Software</h3>
+        <p>Models, pipelines, and interfaces that turn experimental data into decisions.</p>
+        <ul><li>ML & computational design</li><li>Data pipelines</li><li>Lab & cloud tooling</li></ul>
+      </div>
+      <div class="cap reveal" data-d="3">
+        <svg class="ico" viewBox="0 0 32 32" fill="none"><path d="M12 3v6.5a5 5 0 0 1-1 3L7 18a5 5 0 0 0 4 8h10a5 5 0 0 0 4-8l-4-5.5a5 5 0 0 1-1-3V3M10 3h12M13 17h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="num">03</div>
+        <h3>Biological</h3>
+        <p>Assay development and wet-lab systems that generate clean, model-ready data.</p>
+        <ul><li>Assay development</li><li>Protein & antibody work</li><li>Validation at the bench</li></ul>
+      </div>
+      <div class="cap reveal" data-d="4">
+        <svg class="ico" viewBox="0 0 32 32" fill="none"><path d="M16 3 27 7v8c0 7-4.5 11-11 14C9.5 26 5 22 5 15V7l11-4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M11.5 15.5 15 19l6-6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="num">04</div>
+        <h3>Regulatory</h3>
+        <p>Quality and compliance designed in from day one, not bolted on at the end.</p>
+        <ul><li>Design controls</li><li>Quality systems</li><li>Submission strategy</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROJECTS ================= -->
+<section class="section projects" id="projects">
+  <div class="wrap">
+    <div class="cap-head">
+      <div>
+        <span class="eyebrow reveal">Selected work</span>
+        <h2 class="reveal" data-d="1">What we build.</h2>
+      </div>
+      <p class="lead reveal" data-d="2">A growing portfolio of in-house products and custom systems we develop with partners. Vicuna is our flagship.</p>
+    </div>
+
+    <!-- flagship -->
+    <article class="proj-flag reveal">
+      <div class="pf-body">
+        <span class="tag">Flagship product · Software</span>
+        <h3>Vicuna<em>.</em></h3>
+        <p>Nanobody design software that predicts binding for nanobody&ndash;antigen pairs and runs virtual screens across natural repertoires and de novo designs &mdash; surfacing the binders worth making before they reach the bench.</p>
+        <div class="pf-feats">
+          <span class="tag">Binding prediction</span>
+          <span class="tag">Virtual screening</span>
+          <span class="tag">De novo design</span>
+        </div>
+        <div><a class="btn btn--accent" href="vicuna.html">Explore Vicuna <span class="arr">→</span></a></div>
+      </div>
+      <div class="pf-visual">
+        <svg class="ab" viewBox="0 0 320 360" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <linearGradient id="abg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="rgba(255,255,255,.08)"/><stop offset="1" stop-color="rgba(255,255,255,0)"/>
+            </linearGradient>
+          </defs>
+          <rect width="320" height="360" fill="url(#abg)"/>
+          <!-- nanobody (VHH) domain docking an antigen -->
+          <!-- antigen surface -->
+          <path d="M20 300 C 56 264, 126 258, 158 268 C 165 271, 159 286, 160 286 C 161 286, 155 271, 162 268 C 194 258, 264 264, 300 300 L300 360 L20 360 Z" fill="rgba(255,255,255,.13)"/>
+          <path d="M20 300 C 56 264, 130 258, 160 270 C 190 258, 264 264, 300 300" fill="none" stroke="rgba(255,255,255,.32)" stroke-width="2"/>
+          <!-- VHH single domain -->
+          <rect x="126" y="70" width="68" height="108" rx="26" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="8"/>
+          <g stroke="rgba(255,255,255,.32)" stroke-width="3" stroke-linecap="round">
+            <line x1="143" y1="86" x2="143" y2="162"/><line x1="160" y1="82" x2="160" y2="166"/><line x1="177" y1="86" x2="177" y2="162"/>
+          </g>
+          <!-- CDR loops into the antigen -->
+          <g stroke="rgba(255,255,255,.92)" stroke-width="7" fill="none" stroke-linecap="round">
+            <path d="M146 176 C 142 210, 140 232, 144 252"/>
+            <path d="M160 178 C 160 214, 160 238, 160 260"/>
+            <path d="M174 176 C 178 210, 180 232, 176 252"/>
+          </g>
+          <g fill="var(--accent)">
+            <circle cx="144" cy="254" r="9"/><circle cx="160" cy="262" r="9"/><circle cx="176" cy="254" r="9"/>
+          </g>
+          <circle cx="160" cy="262" r="16" fill="none" stroke="var(--accent)" stroke-width="3"/>
+          <g fill="rgba(255,255,255,.5)" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1">
+            <text x="206" y="112">VHH</text>
+            <text x="206" y="250">CDR 1·2·3</text>
+            <text x="160" y="332" text-anchor="middle">ANTIGEN</text>
+          </g>
+        </svg>
+      </div>
+    </article>
+
+    <!-- secondary -->
+    <div class="proj-row">
+      <article class="proj-card reveal" data-d="1">
+        <span class="tag">Service</span>
+        <h4>Custom engineering</h4>
+        <p>Partner with our team to take a specific problem — an instrument, a model, an assay — from concept to a validated, transferable system.</p>
+        <span class="status mono" style="font-size:.74rem; letter-spacing:.1em; color:var(--slate)">→ Scoped per engagement</span>
+      </article>
+      <article class="proj-card reveal" data-d="2">
+        <span class="tag">In development</span>
+        <h4>What's next</h4>
+        <p>We're continually spinning up new tools at the intersection of our four disciplines. Tell us where the science is hard — that's usually where we start.</p>
+        <a class="status" href="mailto:help@guanacolabs.com" style="font-family:var(--font-mono); font-size:.74rem; letter-spacing:.1em; color:var(--accent)">→ Propose a collaboration</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= APPROACH ================= -->
+<section class="section" id="approach">
+  <div class="wrap">
+    <div class="cap-head">
+      <div>
+        <span class="eyebrow reveal">How we work</span>
+        <h2 class="reveal" data-d="1">A tight loop, run end to end.</h2>
+      </div>
+      <p class="lead reveal" data-d="2">Every engagement runs the same disciplined cycle — and each pass through it makes the next one faster.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal" data-d="1"><h4>Define</h4><p>Frame the real constraint with the people closest to it.</p></div>
+      <div class="step reveal" data-d="2"><h4>Design</h4><p>Model the system across hardware, software, and biology.</p></div>
+      <div class="step reveal" data-d="3"><h4>Build</h4><p>Prototype fast, instrument everything, keep it transferable.</p></div>
+      <div class="step reveal" data-d="4"><h4>Validate</h4><p>Test against the bench until the data is clean and repeatable.</p></div>
+      <div class="step reveal" data-d="5"><h4>Comply</h4><p>Bake in quality and regulatory rigor from the first sketch.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TEAM ================= -->
+<section class="section team" id="team">
+  <div class="wrap team-grid">
+    <div class="team-copy">
+      <span class="eyebrow reveal">The team</span>
+      <h2 class="reveal" data-d="1">Engineers who speak each other's languages.</h2>
+      <p class="lead reveal" data-d="2" style="margin-top:1.2rem">Our team has built across four disciplines — and the value is in the overlap. When a regulatory question shapes a mechanical choice early, the whole project moves faster.</p>
+    </div>
+    <ul class="disc-list reveal" data-d="2">
+      <li><span class="k">ME</span><span class="t">Mechanical engineering</span><span class="d">Instruments, fluidics, hardware for the lab</span></li>
+      <li><span class="k">SW</span><span class="t">Software engineering</span><span class="d">Models, pipelines, and interfaces</span></li>
+      <li><span class="k">BIO</span><span class="t">Biological engineering</span><span class="d">Assays and wet-lab validation</span></li>
+      <li><span class="k">REG</span><span class="t">Regulatory affairs</span><span class="d">Quality systems and submission strategy</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="section" id="contact">
+  <div class="wrap contact-inner">
+    <span class="eyebrow no-rule reveal" style="justify-content:center">Start a project</span>
+    <h2 class="reveal" data-d="1">Tell us where the science gets hard. Write <a href="mailto:help@guanacolabs.com">help@guanacolabs.com</a></h2>
+    <div class="contact-meta reveal" data-d="2">
+      <div class="cm"><div class="l">Email</div><div class="v">help@guanacolabs.com</div></div>
+      <div class="cm"><div class="l">Based in</div><div class="v">Seattle, Washington</div></div>
+      <div class="cm"><div class="l">Engagements</div><div class="v">Products & custom work</div></div>
+    </div>
+    <div style="margin-top:2.4rem" class="reveal" data-d="3">
+      <a class="btn btn--accent" href="mailto:help@guanacolabs.com">Get in touch <span class="arr">→</span></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-about">
+        <a class="brand brand--accent" href="index.html">
+          <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 19 C5 12, 8 4, 11 4 C12.5 4, 12.5 7, 12 9 C14 7, 19 8, 19 12 C19 17, 14 19, 11 19 Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="9.6" cy="10" r="1" fill="currentColor"/></svg></span>
+          <span><b>Guanaco</b> Labs</span>
+        </a>
+        <p class="foot-blurb">A Seattle biotechnology company designing technology to meet client needs — across mechanical, software, biological, and regulatory engineering.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#capabilities">Capabilities</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="vicuna.html">Vicuna</a></li>
+          <li><a href="#team">Team</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:help@guanacolabs.com">help@guanacolabs.com</a></li>
+          <li>Seattle, WA 98121</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Guanaco Labs. All rights reserved.</span>
+      <span style="display:inline-flex; gap:20px; align-items:center; flex-wrap:wrap">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <span class="mono">47.61°N · 122.34°W</span>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* header scroll state */
+  var header = document.getElementById('header');
+  addEventListener('scroll', function(){ header.classList.toggle('scrolled', scrollY > 12); }, { passive:true });
+
+  /* mobile menu */
+  var mt = document.getElementById('menuToggle'), nl = document.getElementById('navlinks');
+  mt && mt.addEventListener('click', function(){ nl.classList.toggle('open'); });
+  nl && nl.addEventListener('click', function(e){ if (e.target.tagName === 'A') nl.classList.remove('open'); });
+
+  /* reveal on scroll — robust: initial in-view check + scroll + failsafe */
+  var reveals = [].slice.call(document.querySelectorAll('.reveal'));
+  function revealInView(){
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    for (var i = reveals.length - 1; i >= 0; i--) {
+      var el = reveals[i];
+      if (el.getBoundingClientRect().top < vh * 0.92) { el.classList.add('in'); reveals.splice(i, 1); }
+    }
+  }
+  revealInView();
+  requestAnimationFrame(revealInView);
+  addEventListener('scroll', revealInView, { passive: true });
+  addEventListener('resize', revealInView, { passive: true });
+  /* failsafe: never leave content hidden */
+  setTimeout(function(){ document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); }); }, 2600);
+</script>
+</body>
 </html>

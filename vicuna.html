@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vicuna — Nanobody design software · Guanaco Labs</title>
+<meta name="description" content="Vicuna is nanobody design software from Guanaco Labs — predict binding for nanobody–antigen pairs and run virtual screens across natural repertoires or de novo designs." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="styles.css" />
+<script>
+  /* enable entrance animations unless ?noanim (reduced-motion is handled in CSS) */
+  (function () {
+    try {
+      if (location.search.indexOf('noanim') < 0) document.documentElement.classList.add('anim');
+    } catch (e) { document.documentElement.classList.add('anim'); }
+  })();
+</script>
+<style>
+  /* hero */
+  .v-hero { position: relative; padding-top: clamp(40px, 7vw, 92px); padding-bottom: var(--section-y); overflow: hidden; }
+  .v-hero-grid { display:grid; grid-template-columns: 1.02fr .98fr; gap: clamp(32px,5vw,64px); align-items:center; }
+  .v-name { display:flex; align-items:baseline; gap:.5em; }
+  .v-name h1 { font-size: clamp(3.4rem, 9vw, 7rem); line-height:.9; letter-spacing:-.03em; }
+  .v-name .dot { color: var(--accent); font-size: clamp(3.4rem,9vw,7rem); line-height:.9; font-family:var(--font-serif); }
+  .v-hero .kicker { font-family: var(--font-serif); font-style: italic; font-size: clamp(1.4rem,2.4vw,2rem); color: var(--ink-soft); margin-top:.4em; }
+  .v-hero .lead { margin-top: 1.4rem; max-width: 42ch; }
+  .v-hero-cta { display:flex; flex-wrap:wrap; gap:14px; margin-top: 2rem; }
+  .v-specs { display:flex; flex-wrap:wrap; gap: 10px; margin-top: 2.2rem; }
+  @media (max-width: 880px){ .v-hero-grid { grid-template-columns:1fr; } .v-stage { order:-1; max-width:460px; margin-inline:auto; } }
+
+  /* antibody stage */
+  .v-stage { position:relative; aspect-ratio: 1/1; background: var(--card); border:1px solid var(--line); border-radius: 24px; overflow:hidden; box-shadow: var(--shadow); }
+  .v-stage .grid-bg { position:absolute; inset:0; background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size: 28px 28px; }
+  .v-stage svg { position:absolute; inset:0; width:100%; height:100%; }
+  .ab-chain { stroke: var(--ink); stroke-width: 8; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+  .ab-chain.light { stroke: var(--slate); }
+  .ab-cdr { fill: var(--accent); }
+  .ab-cdr.ring { fill:none; stroke: var(--accent); stroke-width:3; }
+  .ab-lab { font-family: var(--font-mono); font-size: 9px; letter-spacing:.12em; text-transform:uppercase; fill: var(--muted); }
+  .nb-lab-on { font-family: var(--font-mono); font-size: 9px; letter-spacing:.12em; text-transform:uppercase; fill: color-mix(in srgb, var(--paper) 78%, var(--slate)); }
+  .nb-antigen { fill: var(--slate); }
+  .nb-antigen-edge { fill:none; stroke: color-mix(in srgb, var(--slate) 50%, var(--ink)); stroke-width:2; opacity:.45; }
+  .nb-domain { fill: var(--card); stroke: var(--ink); stroke-width:6; }
+  .nb-strand line { stroke: var(--line); stroke-width:3; stroke-linecap:round; }
+  .nb-loop { fill:none; stroke: var(--ink); stroke-width:5; stroke-linecap:round; }
+  .nb-cdr { fill: var(--accent); }
+  .nb-cdr-ring { fill:none; stroke: var(--accent); stroke-width:3; }
+  .nb-contact { fill: var(--accent); }
+  .nb-chip-bg { fill: var(--card); stroke: var(--line); stroke-width:1; }
+  .nb-chip-t { font-family: var(--font-mono); font-size:11px; fill: var(--ink); letter-spacing:.04em; }
+  .ab-tick { stroke: var(--line); stroke-width:1; }
+  @media (prefers-reduced-motion: no-preference){
+    html.anim .ab-cdr.live, html.anim .nb-cdr.live { animation: cdrpulse 3.2s ease-in-out infinite; transform-origin:center; }
+    html.anim .ab-cdr.live.b, html.anim .nb-cdr.live.b{ animation-delay:.8s } html.anim .ab-cdr.live.c, html.anim .nb-cdr.live.c{ animation-delay:1.6s } html.anim .ab-cdr.live.d{ animation-delay:2.4s }
+    html.anim .v-scan { animation: scan 4.5s cubic-bezier(.6,0,.4,1) infinite; }
+  }
+  @keyframes cdrpulse { 0%,100%{ opacity:.55 } 50%{ opacity:1 } }
+  @keyframes scan { 0%,12%{ transform: translateY(-6%); opacity:0 } 20%{opacity:1} 80%{opacity:1} 92%,100%{ transform: translateY(106%); opacity:0 } }
+  .v-scan { fill: var(--accent); opacity:.16; }
+
+  /* feature grid */
+  .feat-grid { display:grid; grid-template-columns: repeat(2,1fr); gap: 1px; background: var(--line); border:1px solid var(--line); border-radius: 18px; overflow:hidden; margin-top: clamp(40px,5vw,60px); }
+  .feat { background: var(--card); padding: clamp(26px,3vw,40px); display:flex; flex-direction:column; gap:12px; transition: background .3s; }
+  .feat:hover { background: var(--paper-2); }
+  .feat .fnum { font-family:var(--font-mono); font-size:.72rem; color: var(--accent); letter-spacing:.1em; }
+  .feat h3 { font-family: var(--font-serif); font-size: 1.7rem; }
+  .feat p { color: var(--ink-soft); font-size:.98rem; max-width: 40ch; }
+  @media (max-width: 680px){ .feat-grid { grid-template-columns:1fr; } }
+
+  /* developability panel */
+  .dev { background: var(--paper-2); }
+  .dev-grid { display:grid; grid-template-columns: 1fr 1.05fr; gap: clamp(32px,5vw,64px); align-items:center; }
+  .dev-card { background: var(--card); border:1px solid var(--line); border-radius: 20px; padding: clamp(26px,3vw,38px); box-shadow: var(--shadow); }
+  .dev-card .dh { display:flex; justify-content:space-between; align-items:baseline; gap:12px; margin-bottom: 22px; }
+  .dev-card .dh .t { font-family: var(--font-mono); font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color: var(--muted); white-space:nowrap; }
+  .dev-card .dh .v { font-family: var(--font-serif); font-size: 1.2rem; white-space:nowrap; }
+  .dev-list { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; }
+  .dev-list li { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:15px 0; border-top:1px solid var(--line); }
+  .dev-list li:first-child { border-top:0; }
+  .dev-list .dn { font-weight:500; }
+  .dev-list .dc { font-family: var(--font-mono); color: var(--accent); font-size:.95rem; }
+  @media (max-width: 820px){ .dev-grid { grid-template-columns:1fr; } }
+
+  /* workflow */
+  .vflow { display:grid; grid-template-columns: repeat(4,1fr); gap: 0; margin-top: clamp(40px,5vw,60px); counter-reset: vf; }
+  .vstep { padding: 28px 24px 28px 0; border-top:2px solid var(--ink); position:relative; }
+  .vstep::before { counter-increment: vf; content: counter(vf,decimal-leading-zero); font-family:var(--font-mono); font-size:.74rem; color:var(--accent); position:absolute; top:-2px; left:0; background: var(--paper); padding-right:10px; transform:translateY(-50%); }
+  .vstep h4 { font-family:var(--font-serif); font-size:1.3rem; margin:10px 0 8px; }
+  .vstep p { font-size:.9rem; color: var(--ink-soft); }
+  @media (max-width:760px){ .vflow { grid-template-columns:1fr 1fr; gap: 6px 26px; } }
+  @media (max-width:460px){ .vflow { grid-template-columns:1fr; } }
+
+  /* big quote / positioning band */
+  .band { background: var(--ink); color: var(--paper); }
+  :root[data-theme="dark"] .band { background: var(--paper-3); }
+  .band .wrap { text-align:center; }
+  .band p { font-family: var(--font-serif); font-size: clamp(1.6rem, 3.4vw, 2.8rem); line-height:1.18; max-width: 22ch; margin-inline:auto; text-wrap: balance; }
+  .band p em { font-style: italic; color: var(--accent-2); }
+  :root[data-theme="dark"] .band p em { color: var(--accent); }
+  .band .src { font-family: var(--font-mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color: color-mix(in srgb, var(--paper) 55%, transparent); margin-top: 1.8em; }
+
+  /* cta */
+  .v-cta { text-align:center; max-width: 56rem; margin-inline:auto; }
+  .v-cta h2 { font-size: clamp(2.2rem,5vw,3.8rem); line-height:1.04; }
+  .v-cta .lead { margin: 1.2rem auto 0; max-width: 46ch; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header" id="header">
+  <div class="wrap nav">
+    <a class="brand brand--accent" href="index.html" aria-label="Guanaco Labs home">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 19 C5 12, 8 4, 11 4 C12.5 4, 12.5 7, 12 9 C14 7, 19 8, 19 12 C19 17, 14 19, 11 19 Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="9.6" cy="10" r="1" fill="currentColor"/></svg></span>
+      <span><b>Guanaco</b> Labs</span>
+    </a>
+    <nav class="nav-links" id="navlinks">
+      <a class="navlink" href="index.html#capabilities">Capabilities</a>
+      <a class="navlink" href="index.html#projects">Projects</a>
+      <a class="navlink" href="vicuna.html" style="color:var(--accent)">Vicuna</a>
+      <a class="navlink" href="#features">Features</a>
+      <a class="btn btn--accent nav-cta" href="mailto:help@guanacolabs.com?subject=Vicuna%20access">Request access</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+  </div>
+</header>
+
+<main>
+<!-- HERO -->
+<section class="v-hero">
+  <div class="wrap v-hero-grid">
+    <div>
+      <span class="eyebrow reveal">Guanaco Labs · Product</span>
+      <div class="v-name reveal" data-d="1"><h1>Vicuna</h1><span class="dot">.</span></div>
+      <p class="kicker reveal" data-d="1">Nanobody design software.</p>
+      <p class="lead reveal" data-d="2">Predict binding for nanobody–antigen pairs, and run virtual screens across natural repertoires or your own designs — to surface the binders worth making before they reach the bench.</p>
+      <div class="v-hero-cta reveal" data-d="3">
+        <a class="btn btn--accent" href="mailto:help@guanacolabs.com?subject=Vicuna%20access">Request access <span class="arr">→</span></a>
+        <a class="btn btn--ghost" href="#features">See what it does</a>
+      </div>
+      <div class="v-specs reveal" data-d="4">
+        <span class="tag">Binding prediction</span>
+        <span class="tag">Virtual screening</span>
+        <span class="tag">Bench-in-the-loop</span>
+      </div>
+    </div>
+
+    <!-- nanobody–antigen binding stage -->
+    <div class="v-stage reveal" data-d="2" aria-hidden="true">
+      <div class="grid-bg"></div>
+      <svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet">
+        <!-- scan over the binding interface -->
+        <rect class="v-scan" x="44" y="250" width="312" height="30" rx="6"/>
+        <!-- prediction chip -->
+        <g>
+          <rect class="nb-chip-bg" x="40" y="42" width="86" height="34" rx="17"/>
+          <circle class="nb-cdr live" cx="60" cy="59" r="5"/>
+          <text class="nb-chip-t" x="76" y="63">BINDS</text>
+        </g>
+        <!-- antigen surface with epitope pocket -->
+        <path class="nb-antigen" d="M44 320 C 78 288, 150 282, 184 292 C 194 295, 197 314, 200 314 C 203 314, 206 295, 216 292 C 250 282, 322 288, 356 320 L356 372 L44 372 Z"/>
+        <path class="nb-antigen-edge" d="M44 320 C 78 288, 150 282, 184 292 C 194 295, 197 314, 200 314 C 203 314, 206 295, 216 292 C 250 282, 322 288, 356 320"/>
+        <!-- nanobody single domain (VHH) -->
+        <g>
+          <rect class="nb-domain" x="158" y="86" width="84" height="124" rx="30"/>
+          <g class="nb-strand">
+            <line x1="176" y1="104" x2="176" y2="190"/>
+            <line x1="189" y1="100" x2="189" y2="194"/>
+            <line x1="202" y1="100" x2="202" y2="194"/>
+            <line x1="215" y1="100" x2="215" y2="194"/>
+            <line x1="228" y1="104" x2="228" y2="190"/>
+          </g>
+          <!-- three CDR loops reaching into the pocket -->
+          <path class="nb-loop" d="M184 206 C 180 240, 176 262, 180 282"/>
+          <path class="nb-loop" d="M200 210 C 200 246, 200 270, 200 292"/>
+          <path class="nb-loop" d="M216 206 C 220 240, 224 262, 220 282"/>
+          <circle class="nb-cdr live" cx="180" cy="284" r="9"/>
+          <circle class="nb-cdr live b" cx="200" cy="294" r="9"/>
+          <circle class="nb-cdr live c" cx="220" cy="284" r="9"/>
+          <circle class="nb-cdr-ring" cx="200" cy="294" r="16"/>
+        </g>
+        <!-- contact points on the antigen -->
+        <circle class="nb-contact" cx="181" cy="300" r="3.5"/>
+        <circle class="nb-contact" cx="200" cy="309" r="3.5"/>
+        <circle class="nb-contact" cx="219" cy="300" r="3.5"/>
+        <!-- labels -->
+        <text class="ab-lab" x="252" y="132">NANOBODY</text>
+        <text class="ab-lab" x="252" y="148">VHH DOMAIN</text>
+        <text class="ab-lab" x="120" y="262" text-anchor="end">CDR 1·2·3</text>
+        <text class="nb-lab-on" x="200" y="352" text-anchor="middle">ANTIGEN</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section" id="features">
+  <div class="wrap">
+    <div class="cap-head">
+      <div>
+        <span class="eyebrow reveal">What it does</span>
+        <h2 class="reveal" data-d="1" style="font-size:clamp(2rem,3.6vw,3.1rem)">From a target to a ranked shortlist.</h2>
+      </div>
+      <p class="lead reveal" data-d="2">Vicuna brings binding prediction and virtual screening into one loop, so your team spends bench time only on nanobodies that have already earned it.</p>
+    </div>
+
+    <div class="feat-grid">
+      <div class="feat reveal" data-d="1">
+        <span class="fnum">01</span>
+        <h3>Binding prediction</h3>
+        <p>Score nanobody&ndash;antigen pairs and rank candidates by predicted binding, before committing to synthesis.</p>
+      </div>
+      <div class="feat reveal" data-d="2">
+        <span class="fnum">02</span>
+        <h3>Virtual screening</h3>
+        <p>Screen large natural nanobody repertoires against your target in silico to find promising binders fast.</p>
+      </div>
+      <div class="feat reveal" data-d="3">
+        <span class="fnum">03</span>
+        <h3>De novo design</h3>
+        <p>Generate and optimize new nanobody designs, then score them through the same binding model.</p>
+      </div>
+      <div class="feat reveal" data-d="4">
+        <span class="fnum">04</span>
+        <h3>Developability screening</h3>
+        <p>Flag aggregation, solubility, and stability liabilities early — the failures that usually surface late.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEVELOPABILITY PANEL -->
+<section class="section dev">
+  <div class="wrap dev-grid">
+    <div>
+      <span class="eyebrow reveal">Developability, up front</span>
+      <h2 class="reveal" data-d="1" style="font-size:clamp(2rem,3.4vw,2.8rem)">See the liabilities before you make the molecule.</h2>
+      <p class="lead reveal" data-d="2" style="margin-top:1.2rem">Every candidate gets a profile across the properties that decide whether a binder survives manufacturing and the clinic — consistent, comparable, and ready to triage.</p>
+    </div>
+    <div class="dev-card reveal" data-d="2" aria-label="Developability properties Vicuna profiles for every candidate">
+      <div class="dh">
+        <span class="t">Profiled properties</span>
+      </div>
+      <ul class="dev-list">
+        <li><span class="dn">Binding affinity</span><span class="dc" aria-hidden="true">✓</span></li>
+        <li><span class="dn">Specificity</span><span class="dc" aria-hidden="true">✓</span></li>
+        <li><span class="dn">Thermal stability</span><span class="dc" aria-hidden="true">✓</span></li>
+        <li><span class="dn">Aggregation risk</span><span class="dc" aria-hidden="true">✓</span></li>
+        <li><span class="dn">Solubility</span><span class="dc" aria-hidden="true">✓</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- POSITIONING BAND -->
+<section class="section band">
+  <div class="wrap">
+    <p class="reveal">Most nanobody programs don't fail at the idea. They fail at <em>developability</em> — late, and expensively.</p>
+    <div class="src reveal" data-d="1">Why we built Vicuna</div>
+  </div>
+</section>
+
+<!-- WORKFLOW -->
+<section class="section" id="workflow">
+  <div class="wrap">
+    <div class="cap-head">
+      <div>
+        <span class="eyebrow reveal">The loop</span>
+        <h2 class="reveal" data-d="1" style="font-size:clamp(2rem,3.6vw,3.1rem)">Design, in a tight cycle.</h2>
+      </div>
+      <p class="lead reveal" data-d="2">Vicuna is built to run with your lab, not instead of it — each round of bench data sharpens the next round of design.</p>
+    </div>
+    <div class="vflow">
+      <div class="vstep reveal" data-d="1"><h4>Assemble</h4><p>Start from natural nanobody repertoires or your own de novo designs.</p></div>
+      <div class="vstep reveal" data-d="2"><h4>Predict</h4><p>Score nanobody–antigen binding and developability in silico.</p></div>
+      <div class="vstep reveal" data-d="3"><h4>Screen</h4><p>Rank, triage, and select the shortlist worth synthesizing.</p></div>
+      <div class="vstep reveal" data-d="4"><h4>Refine</h4><p>Feed bench results back in to sharpen the next round.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section" id="contact">
+  <div class="wrap v-cta">
+    <span class="eyebrow no-rule reveal" style="justify-content:center">Get started</span>
+    <h2 class="reveal" data-d="1">Bring Vicuna into your pipeline.</h2>
+    <p class="lead reveal" data-d="2">We're partnering with a small number of teams. Tell us about your target and we'll set up access and a walkthrough.</p>
+    <div class="v-hero-cta reveal" data-d="3" style="justify-content:center; margin-top:2.2rem">
+      <a class="btn btn--accent" href="mailto:help@guanacolabs.com?subject=Vicuna%20access">Request access <span class="arr">→</span></a>
+      <a class="btn btn--ghost" href="index.html">About Guanaco Labs</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-about">
+        <a class="brand brand--accent" href="index.html">
+          <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 19 C5 12, 8 4, 11 4 C12.5 4, 12.5 7, 12 9 C14 7, 19 8, 19 12 C19 17, 14 19, 11 19 Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="9.6" cy="10" r="1" fill="currentColor"/></svg></span>
+          <span><b>Guanaco</b> Labs</span>
+        </a>
+        <p class="foot-blurb">Vicuna is nanobody design software from Guanaco Labs — a Seattle biotechnology company designing technology to meet client needs.</p>
+      </div>
+      <div>
+        <h4>Vicuna</h4>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#workflow">Workflow</a></li>
+          <li><a href="mailto:help@guanacolabs.com?subject=Vicuna%20access">Request access</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:help@guanacolabs.com">help@guanacolabs.com</a></li>
+          <li>Seattle, WA 98121</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Guanaco Labs. All rights reserved.</span>
+      <span style="display:inline-flex; gap:20px; align-items:center; flex-wrap:wrap">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <span class="mono">Vicuna · vicugna vicugna</span>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var header = document.getElementById('header');
+  addEventListener('scroll', function(){ header.classList.toggle('scrolled', scrollY > 12); }, { passive:true });
+  var mt = document.getElementById('menuToggle'), nl = document.getElementById('navlinks');
+  mt && mt.addEventListener('click', function(){ nl.classList.toggle('open'); });
+  nl && nl.addEventListener('click', function(e){ if (e.target.tagName === 'A') nl.classList.remove('open'); });
+
+  var reveals = [].slice.call(document.querySelectorAll('.reveal'));
+  function revealInView(){
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    for (var i = reveals.length - 1; i >= 0; i--) {
+      var el = reveals[i];
+      if (el.getBoundingClientRect().top < vh * 0.92) { el.classList.add('in'); reveals.splice(i, 1); }
+    }
+  }
+  revealInView();
+  requestAnimationFrame(revealInView);
+  addEventListener('scroll', revealInView, { passive:true });
+  addEventListener('resize', revealInView, { passive:true });
+  setTimeout(function(){ document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); }); }, 2600);
+</script>
+</body>
+</html>
