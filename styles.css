@@ -17,8 +17,8 @@
   --muted:     #837C6D;
   --line:      rgba(27,25,21,0.13);
   --line-soft: rgba(27,25,21,0.07);
-  --accent:    #B8492B;   /* clay / guanaco coat */
-  --accent-2:  #934022;   /* deep clay */
+  --accent:    #2F6B4F;   /* forest green */
+  --accent-2:  #4E9E78;   /* lighter forest — used on the dark band */
   --slate:     #34474C;   /* cool technical */
   --slate-2:   #5C7177;
   --shadow:    0 1px 2px rgba(27,25,21,.05), 0 18px 40px -28px rgba(27,25,21,.35);
@@ -49,17 +49,14 @@
   --muted:     #8C8474;
   --line:      rgba(241,236,224,0.14);
   --line-soft: rgba(241,236,224,0.07);
-  --accent:    #D9633F;
-  --accent-2:  #E07A57;
+  --accent:    #5AA37D;
+  --accent-2:  #72B695;
   --slate:     #9FB6BB;
   --slate-2:   #7C9298;
   --shadow:    0 1px 2px rgba(0,0,0,.4), 0 24px 50px -28px rgba(0,0,0,.7);
 }
 
-/* palette tweak variants */
-:root[data-palette="forest"] { --accent:#2F6B4F; --accent-2:#235140; --slate:#3A4A4F; }
-:root[data-palette="slate"]  { --accent:#37566E; --accent-2:#2A4356; --slate:#4A4F55; }
-:root[data-palette="plum"]   { --accent:#7C4A6E; --accent-2:#613858; --slate:#46414E; }
+/* (palette variants removed with the design-time Tweaks panel — single forest accent shipped) */
 
 /* ---------- reset ---------- */
 *, *::before, *::after { box-sizing: border-box; }
